@@ -1,33 +1,34 @@
 #créé par Francis Genois
 #créé en 2023
 #tp2 jeu de devinette
-
-# je défénis mes variables
-from random import*
-loop = 1
-tentatives = 1
-
+from random import *
 # je défénis les bornes de le devinette
 def bornes():
     a = int(input('quel est le minimum de la devienette?'))
     b = int(input('quel est le maximum de la devienette?'))
-    print("j'ai choisi un nombre entre %d et %d. À vous de le deviner..." %(a, b))
-    c = randint(a,b)
+    print("j'ai choisi un nombre entre %d et %d. À vous de le deviner..." % (a, b))
+    c = randint(a, b)
     return c
-c = bornes()
 
+devinette = "oui"
 # je crée ma boucle
-while loop == 1:
-    essai = int(input("Entrez votre essai:"))
-    if essai == c:
-        print("Bravo! bonne réponse")
-        print("Vous avez réussi en %d tentatives" %(tentatives))
-        loop = loop + 1
-
-    else:
-        print("mauvaise réponse")
+while devinette == "oui":
+    # je défénis mes variables
+    tentatives = 0
+    essai = None
+    c = bornes()
+    # je crée ma boucle
+    while essai != c:
         tentatives = tentatives + 1
+        essai = int(input("Entrez votre essai:"))
+        # réponse trop grande
         if essai > c:
             print('votre réponse est trop grande')
-        else:
-            print('votre réponse est trop basse')
+        # réponse trop petite
+        elif c > essai:
+            print('votre réponse est trop petite')
+    #si vous avez la bonne réponse
+    print("Bravo! bonne réponse")
+    print("Vous avez réussi en %d tentatives" %(tentatives))
+    #si vous voulez rejouer
+    devinette = str(input("voulez vous réessayer? oui ou non?"))
